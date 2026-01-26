@@ -19,7 +19,6 @@ import { getAllProductsWomenSection } from "../services/api";
 import banner5 from "../assests/images/banner5.png"
 
 
-/* ---------------- COMPONENT ---------------- */
 export default function WomenSection() {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -28,20 +27,17 @@ export default function WomenSection() {
     JSON.parse(localStorage.getItem("wishlist")) || []
   );
 
-  /* ---------- SAVE WISHLIST ---------- */
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     getAllProductsWomenSection().then(setProducts);
     
   }, [wishlist]);
 
-  /* ---------- FILTER PRODUCTS ---------- */
   const filteredProducts =
     selectedCategory === "all"
       ? products
       : products.filter((p) => p.type === selectedCategory);
 
-  /* ---------- TOGGLE WISHLIST ---------- */
   const toggleWishlist = (product) => {
     const exists = wishlist.find((item) => item._id === product._id);
     exists
@@ -53,7 +49,6 @@ export default function WomenSection() {
     <>
       <Header />
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
-        {/* Sidebar */}
         <Box
           sx={{
             width: 280,
@@ -91,7 +86,6 @@ export default function WomenSection() {
             ))}
           </List>
 
-          {/* Banners */}
           <Box mt={3}>
             <Box
               component="img"
@@ -107,7 +101,6 @@ export default function WomenSection() {
           </Box>
         </Box>
 
-        {/* Products Section */}
         <Box sx={{ flex: 1, overflowY: "auto" ,p:4}}>
           <Box
             sx={{
@@ -133,7 +126,6 @@ export default function WomenSection() {
                   onMouseEnter={() => setHovered(index)}
                   onMouseLeave={() => setHovered(null)}
                 >
-                  {/* Wishlist */}
                   <IconButton
                     onClick={() => toggleWishlist(product)}
                     sx={{
@@ -151,7 +143,6 @@ export default function WomenSection() {
                     )}
                   </IconButton>
 
-                  {/* Product Image */}
                   <CardMedia
                     component="img"
                     height={200}

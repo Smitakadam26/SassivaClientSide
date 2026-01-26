@@ -7,7 +7,7 @@ export const getAllProductsMenSection = async () => {
   return res.json();
 };
 export const getAllProducts = async () => {
-  const res = await fetch("http://localhost:5000/product");
+  const res = await fetch("http://localhost:5000/product/All");
   return res.json();
 };
 export const getProfile = async () => {
@@ -21,15 +21,32 @@ export const getProfile = async () => {
   return res.json();
 
 };
-export const updateProfile = async (profile) => {
+export const updateProfile = async (formData) => {
   const data = JSON.parse(localStorage.getItem("user"));
-  const res = await fetch("http://localhost:5000/api/users/profile", {
+
+  const res = await fetch("http://localhost:5000/users/profile", {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${data.token}`
+      Authorization: `Bearer ${data.token}`,
     },
-    body: JSON.stringify(profile)
+    body: formData,
   });
+
   return res.json();
 };
+// api.js
+export const updateProduct = async (id, formData) => {
+  const data = JSON.parse(localStorage.getItem("user"));
+
+  const res = await fetch(`http://localhost:5000/product/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${data.token}`, // no Content-Type for FormData
+    },
+    body: formData,
+  });
+
+  return res.json();
+};
+
+

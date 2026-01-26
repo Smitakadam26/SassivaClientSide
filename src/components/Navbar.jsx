@@ -46,7 +46,7 @@ export default function ResponsiveNavbar() {
 
           <Box
             sx={{
-              display: { xs: 'flex', md: 'none' } // auto responsive
+              display: { xs: 'flex', md: 'none' } 
             }}
           >
             <Button

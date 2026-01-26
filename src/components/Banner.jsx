@@ -45,7 +45,7 @@ export default function Banner() {
             alt={`slide-${index}`}
             sx={{
               width: '100%',
-              height: { xs: 180, sm: 220, md: 300 }, // responsive height
+              height: { xs: 180, sm: 220, md: 300 },
               objectFit: 'cover',
             }}
           />

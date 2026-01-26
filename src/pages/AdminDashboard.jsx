@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Button,
   Drawer,
   List,
   ListItemButton,
@@ -17,7 +16,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 import ManageOrders from "./ManageOrders";
@@ -45,7 +43,6 @@ export default function AdminDashboard() {
   return (
     <Box sx={{ display: "flex", minHeight: "100vh", backgroundColor: "#f4f6f8" }}>
       
-      {/* ===== SIDEBAR ===== */}
       <Drawer
         variant="permanent"
         sx={{
@@ -86,10 +83,8 @@ export default function AdminDashboard() {
         </List>
       </Drawer>
 
-      {/* ===== MAIN CONTENT ===== */}
       <Box sx={{ flexGrow: 1, p: 4 }}>
 
-        {/* ---- TOP STATS ---- */}
         <Grid container spacing={3} mb={4}>
           <StatCard title="Total Orders" value="1,245" icon={<ShoppingCartIcon />} />
           <StatCard title="Total Users" value="856" icon={<PeopleIcon />} />

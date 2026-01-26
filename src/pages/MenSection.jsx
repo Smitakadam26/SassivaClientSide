@@ -19,7 +19,6 @@ import { getAllProductsMenSection } from "../services/api";
 import banner5 from "../assests/images/banner5.png"
 
 
-/* ---------------- COMPONENT ---------------- */
 export default function MenSection() {
     const [products, setProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("all");
@@ -28,20 +27,17 @@ export default function MenSection() {
         JSON.parse(localStorage.getItem("wishlist")) || []
     );
 
-    /* ---------- SAVE WISHLIST ---------- */
     useEffect(() => {
         localStorage.setItem("wishlist", JSON.stringify(wishlist));
         getAllProductsMenSection().then(setProducts);
 
     }, [wishlist]);
 
-    /* ---------- FILTER PRODUCTS ---------- */
     const filteredProducts =
         selectedCategory === "all"
             ? products
             : products.filter((p) => p.type === selectedCategory);
 
-    /* ---------- TOGGLE WISHLIST ---------- */
     const toggleWishlist = (product) => {
         const exists = wishlist.find((item) => item._id === product._id);
         exists
@@ -53,7 +49,6 @@ export default function MenSection() {
         <>
             <Header />
             <Box sx={{ display: "flex", minHeight: "100vh" }}>
-                {/* Sidebar */}
                 <Box
                     sx={{
                         width: 280,
@@ -90,7 +85,6 @@ export default function MenSection() {
                         ))}
                     </List>
 
-                    {/* Banners */}
                     <Box mt={3}>
                         <Box
                             component="img"
@@ -106,7 +100,6 @@ export default function MenSection() {
                     </Box>
                 </Box>
 
-                {/* Products Section */}
                 <Box sx={{ flex: 1, overflowY: "auto", p: 4 }}>
                     <Box
                         sx={{
@@ -132,7 +125,6 @@ export default function MenSection() {
                                     onMouseEnter={() => setHovered(index)}
                                     onMouseLeave={() => setHovered(null)}
                                 >
-                                    {/* Wishlist */}
                                     <IconButton
                                         onClick={() => toggleWishlist(product)}
                                         sx={{
@@ -150,7 +142,6 @@ export default function MenSection() {
                                         )}
                                     </IconButton>
 
-                                    {/* Product Image */}
                                     <CardMedia
                                         component="img"
                                         height={200}
@@ -162,7 +153,6 @@ export default function MenSection() {
                                         }}
                                     />
 
-                                    {/* Product Details */}
                                     <CardContent sx={{ flexGrow: 1 }}>
                                         <Typography
                                             fontWeight={600}

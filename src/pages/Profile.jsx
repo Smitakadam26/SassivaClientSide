@@ -113,7 +113,6 @@ function WishList() {
     JSON.parse(localStorage.getItem("wishlist")) || []
   );
 
-  /* ---------- SAVE WISHLIST ---------- */
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
@@ -201,76 +200,84 @@ function WishList() {
   );
 }
 function AccountInfo({ profile, onEdit }) {
-   if (!profile) return null;
+  if (!profile) return null;
 
   return (
-    <Card
-      sx={{
-        borderRadius: 4,
-        overflow: "hidden",
-        boxShadow: 4
-      }}
-    >
-      {/* Header */}
-      <Box
+    <Box>
+      <Typography variant="h5" p={2}>
+        My Account
+      </Typography>
+      <Card
         sx={{
-          background: "#9c444b",
-          p: 3,
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          color: "white"
+          borderRadius: 4,
+          overflow: "hidden",
+          boxShadow: 4,
         }}
       >
-        <Avatar
+
+        <Box
           sx={{
-            width: 70,
-            height: 70,
-            bgcolor: "white",
-            color: "#ff6a6a",
-            fontSize: 32,
-            fontWeight: "bold"
+            background: "#9c444b",
+            p: 3,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            color: "white"
           }}
         >
-          {profile.name?.charAt(0)}
-        </Avatar>
+          <Avatar
+            src={profile.avatar}  
+            sx={{
+              width: 70,
+              height: 70,
+              bgcolor: "white",
+              color: "#ff6a6a",
+              fontSize: 32,
+              fontWeight: "bold",
+            }}
+          >
+            {!profile.avatar && profile.name?.charAt(0)}
+          </Avatar>
 
-        <Box>
-          <Typography variant="h6" fontWeight="bold">
-            {profile.name}
-          </Typography>
-          <Typography variant="body2">
-            {profile.email}
-          </Typography>
+
+          <Box>
+            <Typography variant="h6" fontWeight="bold">
+              {profile.name}
+            </Typography>
+            <Typography variant="body2">
+              {profile.email}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
 
-      {/* Body */}
-      <CardContent sx={{ p: 3 }}>
-        <Grid container spacing={2}>
-          <InfoRow icon={<EmailIcon />} label="Email" value={profile.email} />
-          <InfoRow icon={<PhoneIcon />} label="Phone" value={profile.phoneNumber || "—"} />
-          <InfoRow icon={<WcIcon />} label="Gender" value={profile.gender || "—"} />
-          <InfoRow icon={<LocationOnIcon />} label="Location" value={profile.location || "—"} />
-        </Grid>
+        {/* Body */}
+        <CardContent sx={{ p: 3 }}>
+          <Grid container spacing={2}>
+            <InfoRow icon={<EmailIcon />} label="Email" value={profile.email} />
+            <InfoRow icon={<PhoneIcon />} label="Phone" value={profile.phoneNumber || "—"} />
+            <InfoRow icon={<WcIcon />} label="Gender" value={profile.gender || "—"} />
+            <InfoRow icon={<LocationOnIcon />} label="Location" value={profile.location || "—"} />
+          </Grid>
 
-        <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: 3 }} />
 
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          fullWidth
-          onClick={onEdit}
-          sx={{
-            borderRadius: 3,
-            textTransform: "none",
-            py: 1.2
-          }}
-        >
-          Edit Profile
-        </Button>
-      </CardContent>
-    </Card>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            fullWidth
+            onClick={onEdit}
+            sx={{
+              borderRadius: 3,
+              textTransform: "none",
+              py: 1.2
+            }}
+          >
+            Edit Profile
+          </Button>
+        </CardContent>
+      </Card>
+    </Box>
+
   );
 }
 
@@ -279,12 +286,12 @@ export default function Profile() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
-   const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   useEffect(() => {
     getProfile().then((data) => {
-    console.log("Profile set:", data);
-    setProfile(data);
-  });
+      console.log("Profile set:", data);
+      setProfile(data);
+    });
   }, []);
   const handleLogout = () => {
     logout();
@@ -295,7 +302,6 @@ export default function Profile() {
     <Box sx={{ p: 4, minHeight: "100vh" }}>
       <Grid container spacing={3}>
 
-        {/* ===== Sidebar ===== */}
         <Grid item xs={12} md={3}>
           <Box sx={{ minWidth: 140 }}>
             <img src={Logo} alt="logo" height={100} />
@@ -357,7 +363,6 @@ export default function Profile() {
           </Card>
         </Grid>
 
-        {/* ===== Main Content ===== */}
         <Grid item
           xs={12}
           md={9}
