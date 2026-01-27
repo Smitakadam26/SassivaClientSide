@@ -26,7 +26,6 @@ export default function EditProduct() {
   const TYPE_OPTIONS = ["clothing", "footwear", "bag", "accessories", "jwellery"];
   const CATEGORY_OPTIONS = ["women", "men", "kids"];
 
-  /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -49,7 +48,6 @@ export default function EditProduct() {
     fetchProducts();
   }, []);
 
-  /* ================= EDIT HANDLERS ================= */
   const handleEditClick = (product) => {
     setSelectedProduct({ ...product });
     setEditImages(false);
@@ -68,8 +66,6 @@ export default function EditProduct() {
       [field]: value
     }));
   };
-
-  /* ================= SAVE ================= */
   const handleSave = async () => {
     if (!selectedProduct) return;
 
@@ -108,14 +104,12 @@ export default function EditProduct() {
     }
   };
 
-  /* ================= RENDER ================= */
   return (
     <Box>
       <Typography variant="h6" mb={2}>
         Edit / Delete Product
       </Typography>
 
-      {/* PRODUCT GRID */}
       <Box sx={{ p: 4 }}>
         <Box
           sx={{
@@ -137,51 +131,67 @@ export default function EditProduct() {
                   display: "flex",
                   flexDirection: "column",
                   borderRadius: 3,
-                  boxShadow: 3
+                  boxShadow: 3,
+                  transition: "0.3s",
+                  position: "relative",
+                  height: "100%"
                 }}
               >
+
+
                 <CardMedia
                   component="img"
                   height={200}
-                  image={product.images?.[0] || "/placeholder.png"}
+                  image={product.images[1] ? product.images[1] : product.images[0]}
+                  alt={product.name}
+                  sx={{
+                    objectFit: "contain",
+                    backgroundColor: "white"
+                  }}
                 />
-
-                <CardContent>
-                  <Typography fontWeight={600} noWrap>
+                
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography color="text.secondary" fontWeight={600}>
+                    {product.brand}
+                  </Typography>
+                  <Typography
+                    fontWeight={300}
+                    sx={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      wordBreak: "break-word",
+                      minHeight: "3em"
+                    }}
+                  >
                     {product.name}
                   </Typography>
-                  <Typography color="text.secondary">
-                    ${product.price}
-                  </Typography>
-
-                  <Button
-                    variant="outlined"
-                    sx={{ mt: 2 }}
-                    onClick={() => handleEditClick(product)}
-                  >
-                    Edit
-                  </Button>
+                  <Typography variant="subtitle2" color="text.secondary">{product.color}</Typography>
+                  <Typography variant="h6" fontWeight={600}>{`₹${product.price}`}</Typography>
+                  <Button onClick={() => handleEditClick(product)}>Edit </Button>
                 </CardContent>
+
               </Card>
             ))}
         </Box>
       </Box>
 
-      {/* EDIT DIALOG */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogTitle>Edit Product</DialogTitle>
 
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item xs={12} md={8}>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} p={2}>
                 {[
                   ["name", "Name"],
                   ["brand", "Brand"],
                   ["price", "Price"],
                   ["quantity", "Quantity"],
                   ["fabric", "Fabric"],
-                  ["size", "Size"]
+                  ["size", "Size"],
+                  ["color","Color"]
                 ].map(([field, label]) => (
                   <Grid item xs={12} sm={6} key={field}>
                     <TextField
@@ -231,7 +241,6 @@ export default function EditProduct() {
               </Grid>
             </Grid>
 
-            {/* IMAGES */}
             <Grid item xs={12} md={4}>
               <Typography fontWeight={600} mb={1}>
                 Images

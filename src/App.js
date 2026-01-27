@@ -7,6 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminDashboard from './pages/AdminDashboard';
 import WomenSection from './pages/WomenSection';
 import MenSection from './pages/MenSection';
+import ProductDetail from './pages/ProductDetail';
+import KidSection from './pages/KidSection';
 function App() {
 
   return (
@@ -32,6 +34,8 @@ function App() {
         />
         <Route path='/womensection' element={<WomenSection/>}/>
         <Route path='/mensection' element={<MenSection/>}/>
+        <Route path='/kidsection' element={<KidSection/>}/>
+        <Route path='/productdetail/:id' element={<ProductDetail/>}/>
       </Routes>
     </BrowserRouter>
   );

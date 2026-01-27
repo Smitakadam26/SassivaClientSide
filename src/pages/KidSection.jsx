@@ -1,43 +1,34 @@
-import { useState, useEffect } from "react";
-import {
-    Box,
-    Typography,
-    List,
-    ListItemButton,
-    ListItemText,
-} from "@mui/material";
-import Products from "../components/Products";
 import Header from "../components/Header";
-import { getAllProductsMenSection } from "../services/api";
-import banner5 from "../assests/images/banner5.png"
-
-
-export default function MenSection() {
+import { Box,Typography,List,ListItemText,ListItemButton } from "@mui/material";
+import Products from "../components/Products";
+import banner5 from "../assests/images/banner5.png";
+import { useState,useEffect } from "react";
+import { getAllProductsKidSection } from "../services/api";
+export default function KidSection() {
     const [products, setProducts] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("all");
-    const [hovered, setHovered] = useState(false);
-    const [wishlist, setWishlist] = useState(
-        JSON.parse(localStorage.getItem("wishlist")) || []
-    );
-
-    useEffect(() => {
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
-        getAllProductsMenSection().then(setProducts);
-
-    }, [wishlist]);
-
-    const filteredProducts =
-        selectedCategory === "all"
-            ? products
-            : products.filter((p) => p.type === selectedCategory);
-
-    const toggleWishlist = (product) => {
-        const exists = wishlist.find((item) => item._id === product._id);
-        exists
-            ? setWishlist(wishlist.filter((item) => item._id !== product._id))
-            : setWishlist([...wishlist, product]);
-    };
-
+        const [selectedCategory, setSelectedCategory] = useState("all");
+        const [hovered, setHovered] = useState(false);
+        const [wishlist, setWishlist] = useState(
+            JSON.parse(localStorage.getItem("wishlist")) || []
+        );
+    
+        useEffect(() => {
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            getAllProductsKidSection().then(setProducts);
+    
+        }, [wishlist]);
+    
+        const filteredProducts =
+            selectedCategory === "all"
+                ? products
+                : products.filter((p) => p.type === selectedCategory);
+    
+        const toggleWishlist = (product) => {
+            const exists = wishlist.find((item) => item._id === product._id);
+            exists
+                ? setWishlist(wishlist.filter((item) => item._id !== product._id))
+                : setWishlist([...wishlist, product]);
+        };
     return (
         <>
             <Header />
@@ -56,7 +47,7 @@ export default function MenSection() {
                     }}
                 >
                     <Typography variant="h6" mb={2}>
-                        Men Categories
+                        Kids Categories
                     </Typography>
 
                     <List>
@@ -101,16 +92,16 @@ export default function MenSection() {
                             gap: 3
                         }}
                     >
-                       <Products 
-                                       setHovered={setHovered}
-                                       toggleWishlist={toggleWishlist}
-                                       hovered={hovered}
-                                       filteredProducts={filteredProducts}
-                                       wishlist={wishlist}
-                                       />
+                        <Products
+                            setHovered={setHovered}
+                            toggleWishlist={toggleWishlist}
+                            hovered={hovered}
+                            filteredProducts={filteredProducts}
+                            wishlist={wishlist}
+                        />
                     </Box>
                 </Box>
             </Box>
         </>
-    );
+    )
 }

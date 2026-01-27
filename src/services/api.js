@@ -6,6 +6,10 @@ export const getAllProductsMenSection = async () => {
   const res = await fetch("http://localhost:5000/product?category=men");
   return res.json();
 };
+export const getAllProductsKidSection = async () => {
+  const res = await fetch("http://localhost:5000/product?category=kid");
+  return res.json();
+};
 export const getAllProducts = async () => {
   const res = await fetch("http://localhost:5000/product/All");
   return res.json();
@@ -34,19 +38,23 @@ export const updateProfile = async (formData) => {
 
   return res.json();
 };
-// api.js
 export const updateProduct = async (id, formData) => {
   const data = JSON.parse(localStorage.getItem("user"));
 
   const res = await fetch(`http://localhost:5000/product/${id}`, {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${data.token}`, // no Content-Type for FormData
+      Authorization: `Bearer ${data.token}`, 
     },
     body: formData,
   });
 
   return res.json();
 };
+export const getProductById = async (id) => {
+  const res = await fetch(`http://localhost:5000/product/${id}`);
+  return res.json();
+};
+
 
 

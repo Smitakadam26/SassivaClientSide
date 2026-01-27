@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react";
 import {
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   Typography,
-  Button,
-  IconButton,
   List,
   ListItemButton,
   ListItemText,
 } from "@mui/material";
 
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import Header from "../components/Header";
 import { getAllProductsWomenSection } from "../services/api";
 import banner5 from "../assests/images/banner5.png"
+import Products from "../components/Products";
 
 
 export default function WomenSection() {
@@ -105,79 +99,17 @@ export default function WomenSection() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" },
+              gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(4, 1fr)" },
               gap: 3
             }}
           >
-            {filteredProducts.map((product, index) => {
-              const isWishlisted = wishlist.some((item) => item._id === product._id);
-              return (
-                <Card
-                  key={product.id}
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: 3,
-                    boxShadow: 3,
-                    transition: "0.3s",
-                    position: "relative",
-                    height: "100%"
-                  }}
-                  onMouseEnter={() => setHovered(index)}
-                  onMouseLeave={() => setHovered(null)}
-                >
-                  <IconButton
-                    onClick={() => toggleWishlist(product)}
-                    sx={{
-                      position: "absolute",
-                      top: 10,
-                      right: 10,
-                      backgroundColor: "white",
-                      zIndex: 1
-                    }}
-                  >
-                    {isWishlisted ? (
-                      <FavoriteIcon color="error" />
-                    ) : (
-                      <FavoriteBorderIcon />
-                    )}
-                  </IconButton>
-
-                  <CardMedia
-                    component="img"
-                    height={200}
-                    image={hovered === index && product.images[1] ? product.images[1] : product.images[0]}
-                    alt={product.name}
-                    sx={{
-                      objectFit: "contain",
-                      backgroundColor: "white"
-                    }}
-                  />
-
-                  {/* Product Details */}
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography
-                      fontWeight={600}
-                      sx={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                        wordBreak: "break-word",
-                        minHeight: "3em"
-                      }}
-                    >
-                      {product.name}
-                    </Typography>
-                    <Typography color="text.secondary">{`$${product.price}`}</Typography>
-                  </CardContent>
-
-                  <Button fullWidth variant="contained" size="small" sx={{ borderRadius: 0 }}>
-                    Add to Cart
-                  </Button>
-                </Card>
-              );
-            })}
+                <Products 
+                setHovered={setHovered}
+                toggleWishlist={toggleWishlist}
+                hovered={hovered}
+                filteredProducts={filteredProducts}
+                wishlist={wishlist}
+                />
           </Box>
         </Box>
       </Box>
