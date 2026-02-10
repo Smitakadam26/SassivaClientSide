@@ -92,7 +92,6 @@ export default function AdminDashboard() {
           <StatCard title="Revenue" value="$12,430" icon={<AttachMoneyIcon />} />
         </Grid>
 
-        {/* ---- DYNAMIC CONTENT ---- */}
         <Card sx={{ borderRadius: 3 }}>
           <CardContent>{renderContent()}</CardContent>
         </Card>

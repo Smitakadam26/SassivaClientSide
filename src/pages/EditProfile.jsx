@@ -84,7 +84,6 @@ function EditProfile({ profile, onCancel, onSave }) {
           </Grid>
         </Grid>
 
-        {/* Form Fields */}
         <Grid container spacing={2} mt={1}>
           <Grid item xs={12}>
             <TextField

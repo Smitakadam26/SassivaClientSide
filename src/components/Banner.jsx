@@ -1,66 +1,74 @@
-import { useState, useEffect } from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import { Box, MobileStepper, IconButton } from '@mui/material';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import banner1 from '../assests/images/banner1.png';
-import banner3 from '../assests/images/banner3.png';
-import banner2 from '../assests/images/banner2.png';
-import banner4 from '../assests/images/banner4.png';
-const images = [
-  banner1,
-  banner2,
-  banner3,
-  banner4,
-];
+import { useState, useEffect, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Box, MobileStepper, IconButton } from "@mui/material";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+
+import banner1 from "../assests/images/banner1.png";
+import banner2 from "../assests/images/banner2.png";
+import banner3 from "../assests/images/banner3.png";
+import banner4 from "../assests/images/banner4.png";
+
+const images = [banner1, banner2, banner3, banner4];
 
 export default function Banner() {
   const [activeStep, setActiveStep] = useState(0);
+  const swiperRef = useRef(null);
   const maxSteps = images.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % maxSteps);
-    }, 4000); 
-    return () => clearInterval(timer);
-  }, [maxSteps]);
+      swiperRef.current?.slideNext();
+    }, 4000);
 
-  const handleNext = () => setActiveStep((prev) => (prev + 1) % maxSteps);
-  const handleBack = () => setActiveStep((prev) => (prev - 1 + maxSteps) % maxSteps);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleNext = () => swiperRef.current?.slideNext();
+  const handleBack = () => swiperRef.current?.slidePrev();
 
   return (
-    <Box sx={{ position: 'relative', mt: 3, borderRadius: 2, overflow: 'hidden', maxWidth: '100%' }}>
-      
-      <SwipeableViews
-        index={activeStep}
-        enableMouseEvents
-        resistance
-        style={{ width: '100%' }}
+    <Box
+      sx={{
+        position: "relative",
+        mt: 3,
+        borderRadius: 2,
+        overflow: "hidden",
+        maxWidth: "100%",
+      }}
+    >
+      <Swiper
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
+        onSlideChange={(swiper) => setActiveStep(swiper.activeIndex)}
+        resistanceRatio={0.85}
+        style={{ width: "100%" }}
       >
         {images.map((src, index) => (
-          <Box
-            key={index}
-            component="img"
-            src={src}
-            alt={`slide-${index}`}
-            sx={{
-              width: '100%',
-              height: { xs: 180, sm: 220, md: 300 },
-              objectFit: 'cover',
-            }}
-          />
+          <SwiperSlide key={index}>
+            <Box
+              component="img"
+              src={src}
+              alt={`slide-${index}`}
+              sx={{
+                width: "100%",
+                height: { xs: 180, sm: 220, md: 300 },
+                objectFit: "cover",
+              }}
+            />
+          </SwiperSlide>
         ))}
-      </SwipeableViews>
+      </Swiper>
 
       <IconButton
         onClick={handleBack}
         sx={{
-          position: 'absolute',
-          top: '50%',
+          position: "absolute",
+          top: "50%",
           left: 8,
-          transform: 'translateY(-50%)',
-          backgroundColor: 'rgba(255,255,255,0.7)',
-          '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' },
+          transform: "translateY(-50%)",
+          backgroundColor: "rgba(255,255,255,0.7)",
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.9)" },
         }}
       >
         <KeyboardArrowLeft />
@@ -69,12 +77,12 @@ export default function Banner() {
       <IconButton
         onClick={handleNext}
         sx={{
-          position: 'absolute',
-          top: '50%',
+          position: "absolute",
+          top: "50%",
           right: 8,
-          transform: 'translateY(-50%)',
-          backgroundColor: 'rgba(255,255,255,0.7)',
-          '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' },
+          transform: "translateY(-50%)",
+          backgroundColor: "rgba(255,255,255,0.7)",
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.9)" },
         }}
       >
         <KeyboardArrowRight />
@@ -84,7 +92,7 @@ export default function Banner() {
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
-        sx={{ justifyContent: 'center', mt: 1, background: 'transparent' }}
+        sx={{ justifyContent: "center", mt: 1, background: "transparent" }}
         nextButton={<div />}
         backButton={<div />}
       />

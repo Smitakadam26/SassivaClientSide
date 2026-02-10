@@ -147,7 +147,6 @@ function WishList() {
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
               >
-                {/* ❤️ Wishlist */}
                 <IconButton
                   onClick={() => toggleWishlist(product)}
                   sx={{
@@ -250,7 +249,6 @@ function AccountInfo({ profile, onEdit }) {
           </Box>
         </Box>
 
-        {/* Body */}
         <CardContent sx={{ p: 3 }}>
           <Grid container spacing={2}>
             <InfoRow icon={<EmailIcon />} label="Email" value={profile.email} />
