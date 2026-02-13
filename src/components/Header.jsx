@@ -1,23 +1,11 @@
-
-import {
-    AppBar,
-    Toolbar,
-    Box,
-    styled,
-    InputBase,
-    IconButton,
-    Typography,
-    Badge,
-    Container,
-    alpha,
-    Stack
+import {AppBar,Toolbar,Box,styled,InputBase,IconButton,Badge,Container,alpha,Stack,
+    useTheme,useMediaQuery
 } from '@mui/material';
-
 import SearchIcon from '@mui/icons-material/Search';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import Navbar from "../components/Navbar";
-import Logo from '../assests/images/logo2.png';
+import Logo from '../assests/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 
@@ -60,7 +48,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
     const navigate = useNavigate();
     const { user } = useAuth();
-
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const handleClick = () => {
         if (user) {
             if (user.role === "admin") {
@@ -73,20 +62,21 @@ export default function Header() {
             navigate("/Signup");
         }
     };
+
     return (
         <>
             <AppBar position="sticky" color="inherit" elevation={1}>
-                <Container maxWidth="lg">
+                <Container maxWidth="lg" sx={{display: { xs: "flex", sm: "inline" }}}>
                     <Toolbar
                         sx={{
-                            display: 'flex',
+                            display: {xs:'inline',sm:"flex"},
                             alignItems: 'center',
                             gap: 2
                         }}
                     >
 
                         <Box sx={{ minWidth: 140 }}>
-                            <img src={Logo} alt="logo" height={100} />
+                            <img src={Logo} alt="logo" height={70} />
                         </Box>
 
 
@@ -103,19 +93,19 @@ export default function Header() {
                         </Box>
 
 
-                        <Stack
+                       {!isMobile && <Stack
                             direction="row"
                             spacing={2}
                             alignItems="center"
                             sx={{ minWidth: 200, justifyContent: 'flex-end' }}
                         >
-                            <Typography
+                            {/*<Typography
                                 variant="subtitle1"
                                 fontWeight={600}
                                 sx={{ display: { xs: 'none', md: 'block' } }}
                             >
                                 $3.69
-                            </Typography>
+                            </Typography>*/}
 
                             <IconButton aria-label="account" onClick={handleClick}>
                                 <PermIdentityOutlinedIcon />
@@ -126,7 +116,7 @@ export default function Header() {
                                     <ShoppingBagOutlinedIcon />
                                 </Badge>
                             </IconButton>
-                        </Stack>
+                        </Stack>}
                     </Toolbar>
 
                     <Navbar />

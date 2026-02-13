@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assests/images/logo2.png";
+import Logo from "../assests/images/logo.png";
 import { getProfile } from '../services/api';
 
 
@@ -32,7 +32,7 @@ export default function Sidebar({setActiveTab,setMobileOpen}) {
     return (
         <>
             <Box>
-                <img src={Logo} alt="logo" height={100} />
+                <img src={Logo} alt="logo" height={75} />
             </Box>
 
             <Card sx={{ borderRadius: 3, background: "#f9e5e5ff" }}>

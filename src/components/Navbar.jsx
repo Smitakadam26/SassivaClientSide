@@ -1,31 +1,24 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Toolbar,
-  Button,
-  Menu,
-  MenuItem,
-  Box,
-  Stack,
-  Container
-} from '@mui/material';
-import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+import {Toolbar,Button,Menu,MenuItem, Box,Stack,useTheme,useMediaQuery} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 export default function ResponsiveNavbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const handleOpen = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   return (
-      <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-          <Stack
+        <Toolbar disableGutters >
+          {!isMobile && (<Stack
             direction="row"
             spacing={2}
             sx={{
-              display: { xs: 'none', md: 'flex'} 
+              display:'flex'
             }}
           >
             <Button component={Link} to="/" color='black' >
@@ -40,15 +33,14 @@ export default function ResponsiveNavbar() {
             <Button component={Link} to="/kidsection" color='black'>
               Kids
             </Button>
-          </Stack>
+          </Stack>)}
 
-          <Box
-            sx={{
-              display: { xs: 'flex', md: 'none' } 
+          {isMobile && <Box sx={{
+              display: 'flex'
             }}
           >
             <Button
-              startIcon={<ListOutlinedIcon />}
+              startIcon={<MenuIcon />}
               onClick={handleOpen}
             >
             </Button>
@@ -66,9 +58,11 @@ export default function ResponsiveNavbar() {
               <MenuItem component={Link} to="/kidsection" onClick={handleClose}>
                 Kids
               </MenuItem>
+              <MenuItem component={Link} to="/Profile" onClick={handleClose}>
+                Account
+              </MenuItem>
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
-      </Container>
   );
 }
