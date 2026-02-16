@@ -41,10 +41,10 @@ export default function AddProduct() {
   });
 
   const data = await res.json();
-  console.log("Full response:", data); // 👈 ADD THIS
+  console.log("Full response:", data); 
 
   if (!res.ok) {
-    console.error("Backend error:", data); // 👈 ADD THIS
+    console.error("Backend error:", data); 
     throw new Error(JSON.stringify(data));
   }
 

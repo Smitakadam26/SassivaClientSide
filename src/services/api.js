@@ -48,12 +48,4 @@ export const getProductById = async (id) => {
   return res.json();
 };
 
-export const postProduct = async(formData)=>{
-  await fetch(`${API}/product/add`, {
-      method: "POST",
-      credentials:"include",
-      body: formData,
-    });
-}
-
 
