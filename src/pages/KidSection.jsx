@@ -4,6 +4,7 @@ import banner5 from "../assests/images/banner5.png";
 import Section from "../components/Section";
 import { useState, useEffect } from "react";
 import { getAllProductsKidSection } from "../services/api";
+import Footer from "../components/Footer";
 export default function KidSection() {
     const [products, setProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("all");
@@ -75,6 +76,7 @@ export default function KidSection() {
                 </Box>
             )
         }
+        
     
     return (
         <>
@@ -85,6 +87,7 @@ export default function KidSection() {
                 setMobileOpen={setMobileOpen}
                 category={"Kids"}
             />
+            <Footer/>
         </>
     )
 }

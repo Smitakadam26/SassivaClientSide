@@ -48,4 +48,17 @@ export const getProductById = async (id) => {
   return res.json();
 };
 
+export const getFeaturedProducts = async () => {
+  try {
+    const response = await fetch(`http://localhost:5000/product/featured`);
 
+    if (!response.ok) {
+      throw new Error("Failed to fetch featured products");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+};

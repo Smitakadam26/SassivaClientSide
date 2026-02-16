@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { getAllProductsMenSection } from "../services/api";
 import banner5 from "../assests/images/banner5.png"
 import Section from "../components/Section";
+import Footer from "../components/Footer";
 
 export default function MenSection() {
     const [products, setProducts] = useState([]);
@@ -81,6 +82,7 @@ export default function MenSection() {
              setMobileOpen={setMobileOpen}
              category={"Men"}
              />
+             <Footer/>
         </>
     );
 }

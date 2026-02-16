@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Box,TextField,Button,Typography,Grid,Select,MenuItem,FormControl,InputLabel} from "@mui/material";
+import { Box, TextField, Button, Typography, Grid, Select, MenuItem, FormControl, InputLabel,Checkbox,FormControlLabel } from "@mui/material";
 
 
 export default function AddProduct() {
@@ -34,24 +34,24 @@ export default function AddProduct() {
     });
 
     try {
-  const res = await fetch("https://sassivaserver.vercel.app/product/add", {
-    method: "POST",
-    credentials: "include",
-    body: formData,
-  });
+      const res = await fetch("https://sassivaserver.vercel.app/product/add", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      });
 
-  const data = await res.json();
-  console.log("Full response:", data); 
+      const data = await res.json();
+      console.log("Full response:", data);
 
-  if (!res.ok) {
-    console.error("Backend error:", data); 
-    throw new Error(JSON.stringify(data));
-  }
+      if (!res.ok) {
+        console.error("Backend error:", data);
+        throw new Error(JSON.stringify(data));
+      }
 
-  console.log("Success:", data);
-} catch (err) {
-  console.error("Frontend Error:", err);
-}
+      console.log("Success:", data);
+    } catch (err) {
+      console.error("Frontend Error:", err);
+    }
 
     alert("Product added successfully!");
   }
@@ -92,6 +92,24 @@ export default function AddProduct() {
 
         <Grid item xs={12}>
           <TextField name="price" label="Price" type="number" fullWidth onChange={handleChange} />
+        </Grid>
+
+        <Grid xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="featured"
+                checked={product.featured}
+                onChange={(e) =>
+                  setProduct({
+                    ...product,
+                    featured: e.target.checked
+                  })
+                }
+              />
+            }
+            label="Featured Product"
+          />
         </Grid>
 
         <Grid item xs={12} md={6}>

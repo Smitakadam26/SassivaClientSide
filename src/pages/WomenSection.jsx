@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { getAllProductsWomenSection } from "../services/api";
 import banner5 from "../assests/images/banner5.png";
 import Section from "../components/Section";
+import Footer from "../components/Footer";
 
 
 export default function WomenSection() {
@@ -80,6 +81,7 @@ export default function WomenSection() {
       <Header />
       <Section filteredProducts={filteredProducts} Sidebar={<Sidebar/>}
       mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} category={"Women"}/>
+      <Footer/>
     </>
   );
 }
