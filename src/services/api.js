@@ -10,7 +10,7 @@ export const getAllProductsMenSection = async () => {
   return res.json();
 };
 export const getAllProductsKidSection = async () => {
-  const res = await fetch(`${API}/product?category=kid`);
+  const res = await fetch(`${API}/product?category=kids`);
   return res.json();
 };
 export const getAllProducts = async () => {

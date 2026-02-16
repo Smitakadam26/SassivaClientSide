@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
 const handleLogin = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch("http://localhost:5000/signin", {
+    const response = await fetch("https://fashion-eccomerce-web-server.vercel.app/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials:"include",

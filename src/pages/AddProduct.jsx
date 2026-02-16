@@ -36,18 +36,21 @@ export default function AddProduct() {
     try {
   const res = await fetch("https://fashion-eccomerce-web-server.vercel.app/product/add", {
     method: "POST",
+    credentials: "include",
     body: formData,
   });
 
   const data = await res.json();
+  console.log("Full response:", data); // 👈 ADD THIS
 
   if (!res.ok) {
-    throw new Error(data.message);
+    console.error("Backend error:", data); // 👈 ADD THIS
+    throw new Error(JSON.stringify(data));
   }
 
   console.log("Success:", data);
 } catch (err) {
-  console.error("Frontend Error:", err.message);
+  console.error("Frontend Error:", err);
 }
 
     alert("Product added successfully!");
