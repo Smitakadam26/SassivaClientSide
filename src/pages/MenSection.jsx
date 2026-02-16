@@ -11,6 +11,7 @@ export default function MenSection() {
     const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
 
     useEffect(() => {
+        
         localStorage.setItem("wishlist", JSON.stringify(wishlist));
         getAllProductsMenSection().then(setProducts);
 

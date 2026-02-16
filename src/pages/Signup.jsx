@@ -28,7 +28,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch("https://fashion-eccomerce-web-server.vercel.app/register", {
+    const response = await fetch("https://sassivaserver.vercel.app/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
 const handleLogin = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch("https://fashion-eccomerce-web-server.vercel.app/signin", {
+    const response = await fetch("https://sassivaserver.vercel.app/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials:"include",

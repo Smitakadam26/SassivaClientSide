@@ -34,7 +34,7 @@ export default function AddProduct() {
     });
 
     try {
-  const res = await fetch("https://fashion-eccomerce-web-server.vercel.app/product/add", {
+  const res = await fetch("https://sassivaserver.vercel.app/product/add", {
     method: "POST",
     credentials: "include",
     body: formData,
