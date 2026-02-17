@@ -42,7 +42,6 @@ export default function Home() {
             <Banner />
 
             <Box sx={{ py: 6 }}>
-                <Container>
                     <Typography variant="h4" align="center" gutterBottom>
                         Shop by Category
                     </Typography>
@@ -108,7 +107,6 @@ export default function Home() {
                             </Card>
                         ))}
                     </Box>
-                </Container>
             </Box>
 
 
