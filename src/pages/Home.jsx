@@ -13,19 +13,19 @@ const categories = [
         id: 1,
         name: "Men",
         image: menbanner,
-        slug: "mensection"
+        url: "mensection"
     },
     {
         id: 2,
         name: "Women",
         image: womenbanner,
-        slug: "womensection"
+        surl: "womensection"
     },
     {
         id: 3,
         name: "Kids",
         image: kidsbanner,
-        slug: "kidsection"
+        url: "kidsection"
     }
 ];
 
@@ -33,7 +33,7 @@ export default function Home() {
     
     const navigate = useNavigate();
     const handleCategoryClick = (category) => {
-        navigate(`/${category.slug}`);
+        navigate(`/${category.url}`);
     };
 
     return (
