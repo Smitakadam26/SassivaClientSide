@@ -2,13 +2,12 @@ import Header from "../components/Header";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import Newsletter from "./Newsletter";
-import { Box, Container, Typography, Card, CardMedia, CardContent } from "@mui/material";
-import { useEffect, useState } from "react";
-import { getFeaturedProducts } from "../services/api";
+import { Box, Container, Typography, Card, CardMedia} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import menbanner from "../assests/images/menbanner.webp";
 import womenbanner from "../assests/images/womenbanner.webp";
 import kidsbanner from "../assests/images/kidsbanner.jpg";
+import FeaturedProducts from "../components/FeaturedProducts";
 const categories = [
     {
         id: 1,
@@ -31,21 +30,8 @@ const categories = [
 ];
 
 export default function Home() {
-    const [featuredProducts, setFeaturedProducts] = useState([]);
+    
     const navigate = useNavigate();
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const data = await getFeaturedProducts();
-
-            setFeaturedProducts(data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
     const handleCategoryClick = (category) => {
         navigate(`/${category.slug}`);
     };
@@ -129,49 +115,7 @@ export default function Home() {
             <Typography variant="h4" align="center" gutterBottom>
                 Featured Products
             </Typography>
-            <Container>
-                <Box sx={{
-                    display: "grid",
-                    gridTemplateColumns: {
-                        xs: "1fr",
-                        sm: "repeat(2, 1fr)",
-                        md: "repeat(4, 1fr)"
-                    },
-                    gap: 3,
-                    my: 2
-                }}>
-
-                    {featuredProducts.map((product) => (
-                        <Card sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            borderRadius: 3,
-                            boxShadow: 3,
-                            transition: "0.3s",
-                            position: "relative",
-                            height: "100%"
-                        }}>
-                            <Box
-                                onClick={() => navigate('/productDetail/' + product._id)}
-                                sx={{ cursor: "pointer", flexGrow: 1, display: "flex", flexDirection: "column" }}
-                            >
-                                <CardMedia
-                                    component="img"
-                                    height="200"
-                                    image={product.images[0]}
-                                    alt={product.name}
-                                />
-                                <CardContent>
-                                    <Typography variant="h6">{product.name}</Typography>
-                                    <Typography color="text.secondary">
-                                        {product.price}
-                                    </Typography>
-                                </CardContent>
-                            </Box>
-                        </Card>
-                    ))}
-                </Box>
-            </Container>
+            <FeaturedProducts/>
             <Newsletter />
             <Footer />
         </>

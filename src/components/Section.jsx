@@ -1,21 +1,9 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import Products from "../components/Products";
 import { IconButton, Drawer, Box, Typography, useTheme, useMediaQuery } from "@mui/material";
-import { useState,useEffect } from "react";
+import { useState} from "react";
 export default function Section({Sidebar,filteredProducts,mobileOpen,setMobileOpen,category}) {
     const [hovered, setHovered] = useState(false);
-    const [wishlist, setWishlist] = useState(
-        JSON.parse(localStorage.getItem("wishlist")) || []
-    );
-     useEffect(() => {
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      }, [wishlist]);
-    const toggleWishlist = (product) => {
-        const exists = wishlist.find((item) => item._id === product._id);
-        exists
-            ? setWishlist(wishlist.filter((item) => item._id !== product._id))
-            : setWishlist([...wishlist, product]);
-    };
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     return (
@@ -67,10 +55,8 @@ export default function Section({Sidebar,filteredProducts,mobileOpen,setMobileOp
             }}>
                 <Products
                     setHovered={setHovered}
-                    toggleWishlist={toggleWishlist}
                     hovered={hovered}
                     filteredProducts={filteredProducts}
-                    wishlist={wishlist}
                 />
             </Box>
         </Box>

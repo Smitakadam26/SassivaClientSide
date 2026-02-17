@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useAuth } from "../context/AuthContext";
+import { signIn } from "../services/api";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -56,26 +57,9 @@ const handleSubmit = async (e) => {
 };
 const handleLogin = async (e) => {
   e.preventDefault();
-  try {
-    const response = await fetch("https://sassivaserver.vercel.app/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials:"include",
-      body: JSON.stringify({ email, password }),
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      alert(result.message || "Login failed");
-      return;
-    }
-    login(result);       
-    navigate("/");           
-
-  } catch (err) {
-    console.log(err);
-  }
+  const result = await signIn(email,password);
+  login(result);       
+  navigate("/");
 };
 
   return (
@@ -104,7 +88,7 @@ const handleLogin = async (e) => {
          Sign IN
         </Typography> 
           <Grid container spacing={2}>
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Email"
@@ -114,10 +98,11 @@ const handleLogin = async (e) => {
               />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Password"
+                autoComplete="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -153,7 +138,7 @@ const handleLogin = async (e) => {
           Create Account
         </Typography> 
           <Grid container spacing={2}>
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Name"
@@ -162,7 +147,7 @@ const handleLogin = async (e) => {
               />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Email"
@@ -172,17 +157,18 @@ const handleLogin = async (e) => {
               />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Password"
+                autoComplete="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Phone Number"
@@ -192,7 +178,7 @@ const handleLogin = async (e) => {
               />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Gender"
@@ -201,7 +187,7 @@ const handleLogin = async (e) => {
               />
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={{xs:12}}>
               <TextField
                 fullWidth
                 label="Location"

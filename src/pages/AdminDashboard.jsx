@@ -140,7 +140,7 @@ export default function AdminDashboard() {
 
 function StatCard({ title, value, icon }) {
   return (
-    <Grid item xs={12} sm={6} md={3}>
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
       <Card sx={{ borderRadius: 3 }}>
         <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Box sx={{ fontSize: 40 }}>{icon}</Box>

@@ -62,39 +62,39 @@ export default function AddProduct() {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md:6 }}>
           <TextField name="name" label="Product Name" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md:6 }}>
           <TextField name="brand" label="Brand" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md:6 }}>
           <TextField name="fabric" label="Fabric" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md:4 }}>
           <TextField name="size" label="Size" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md:4 }}>
           <TextField name="color" label="Color" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md:4 }}>
           <TextField name="quantity" label="Quantity" type="number" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md:4 }}>
           <TextField name="packof" label="Pack Of" type="number" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12}}>
           <TextField name="price" label="Price" type="number" fullWidth onChange={handleChange} />
         </Grid>
 
-        <Grid xs={12}>
+        <Grid size={{ xs: 12}}>
           <FormControlLabel
             control={
               <Checkbox
@@ -112,7 +112,7 @@ export default function AddProduct() {
           />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md:6 }}>
           <FormControl fullWidth>
             <InputLabel>Category</InputLabel>
             <Select name="category" value={product.category} label="Category" onChange={handleChange}>
@@ -123,7 +123,7 @@ export default function AddProduct() {
           </FormControl>
         </Grid>
 
-        {product.category === 'women' && (<Grid item xs={12} md={6}>
+        {product.category === 'women' && (<Grid size={{ xs: 12, md:6 }}>
           <FormControl fullWidth>
             <InputLabel>Type</InputLabel>
             <Select name="type" value={product.type} label="Type" onChange={handleChange}>
@@ -136,7 +136,7 @@ export default function AddProduct() {
           </FormControl>
         </Grid>)}
 
-        {product.category === 'men' && (<Grid item xs={12} md={6}>
+        {product.category === 'men' && (<Grid size={{ xs: 12, md:6 }}>
           <FormControl fullWidth>
             <InputLabel>Type</InputLabel>
             <Select name="type" value={product.type} label="Type" onChange={handleChange}>
@@ -147,7 +147,7 @@ export default function AddProduct() {
             </Select>
           </FormControl>
         </Grid>)}
-        {product.category === 'kids' && (<Grid item xs={12} md={6}>
+        {product.category === 'kids' && (<Grid size={{ xs: 12, md:6 }}>
           <FormControl fullWidth>
             <InputLabel>Type</InputLabel>
             <Select name="type" value={product.type} label="Type" onChange={handleChange}>
@@ -159,11 +159,11 @@ export default function AddProduct() {
           </FormControl>
         </Grid>)}
 
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12}}>
           <input type="file" multiple onChange={(e) => setImages([...e.target.files])} />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12}}>
           <Button variant="contained" fullWidth onClick={handleSubmit}>
             Add Product
           </Button>

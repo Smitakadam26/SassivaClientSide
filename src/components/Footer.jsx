@@ -23,7 +23,7 @@ const Footer = () => {
       <Container sx={{ py: 5 }}>
         <Grid container spacing={4}>
 
-          <Grid xs={12} sm={6} md={4}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Typography variant="h6" gutterBottom>
               Men
             </Typography>
@@ -33,7 +33,7 @@ const Footer = () => {
             <Typography sx={{ cursor: "pointer" }}>Watches</Typography>
           </Grid>
 
-          <Grid xs={12} sm={6} md={4}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Typography variant="h6" gutterBottom>
               Women
             </Typography>
@@ -44,7 +44,7 @@ const Footer = () => {
             <Typography sx={{ cursor: "pointer" }}>Bags</Typography>
           </Grid>
 
-          <Grid xs={12} sm={6} md={4}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Typography variant="h6" gutterBottom>
               Kids
             </Typography>
@@ -54,8 +54,8 @@ const Footer = () => {
             <Typography sx={{ cursor: "pointer" }}>Toys</Typography>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Grid xs={12} sm={6} md={4}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
               <Typography variant="h6" gutterBottom>
                 Support
               </Typography>
@@ -109,13 +109,13 @@ const Footer = () => {
       <Container sx={{ py: 3 }}>
         <Grid container alignItems="center">
 
-          <Grid xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Typography variant="body2">
-              © 202 All rights reserved
+              © 2025 All rights reserved
             </Typography>
           </Grid>
 
-          <Grid xs={12} md={6} sx={{ textAlign: { xs: "left", md: "right" } }}>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ textAlign: { xs: "left", md: "right" } }}>
             <IconButton sx={{ color: "#fff" }}>
               <FacebookOutlinedIcon />
             </IconButton>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import {Box,Grid,Avatar,Typography,Card,CardContent,Button,Divider,IconButton,
-        Drawer,useMediaQuery} from "@mui/material";
+import {
+  Box, Grid, Avatar, Typography, Card, CardContent, Button, Divider, IconButton,
+  Drawer, useMediaQuery
+} from "@mui/material";
 import { getProfile } from '../services/api';
 import EditProfile from "./EditProfile";
 import EmailIcon from '@mui/icons-material/Email';
@@ -12,10 +14,11 @@ import Products from "../components/Products";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import Sidebar from "../components/Sidebar";
+import { fetchWishlist } from "../services/api";
 
 function InfoRow({ icon, label, value }) {
   return (
-    <Grid xs={12} sm={6}>
+    <Grid size={{ xs: 12, sm: 6 }}>
       <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
         <Box sx={{ color: "primary.main" }}>{icon}</Box>
         <Box>
@@ -90,17 +93,18 @@ function Security() {
   );
 }
 function WishList() {
-  const [wishlist, setWishlist] = useState(
-    JSON.parse(localStorage.getItem("wishlist")) || []
-  );
+  const [wishlist, setWishlist] = useState([]);
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    fetchWishlist()
+      .then((data) => {
+        setWishlist(Array.isArray(data) ? data : []);
+      })
+      .catch(() => {
+        setWishlist([]);
+      });
   }, [wishlist]);
   const toggleWishlist = (product) => {
-    const exists = wishlist.find((item) => item._id === product._id);
-    exists
-      ? setWishlist(wishlist.filter((item) => item._id !== product._id))
-      : setWishlist([...wishlist, product]);
+    
   };
   const [hovered, setHovered] = useState(false);
   return (
@@ -204,7 +208,7 @@ export default function Profile() {
   const [editMode, setEditMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     getProfile().then((data) => {
@@ -213,7 +217,7 @@ export default function Profile() {
   }, []);
 
   return (
-        <Box sx={{p:{md:4} ,minHeight: "100vh", display: "flex", gap: 3 }}>
+    <Box sx={{ p: { md: 4 }, minHeight: "100vh", display: "flex", gap: 3 }}>
 
       {isMobile && (
         <IconButton
@@ -233,7 +237,7 @@ export default function Profile() {
             top: 20,
           }}
         >
-          <Sidebar setActiveTab={setActiveTab} setMobileOpen={setMobileOpen}/>
+          <Sidebar setActiveTab={setActiveTab} setMobileOpen={setMobileOpen} />
         </Box>
       )}
 
@@ -243,7 +247,7 @@ export default function Profile() {
         onClose={() => setMobileOpen(false)}
       >
         <Box sx={{ width: 250, p: 2 }}>
-          <Sidebar setActiveTab={setActiveTab} setMobileOpen={setMobileOpen}/>
+          <Sidebar setActiveTab={setActiveTab} setMobileOpen={setMobileOpen} />
         </Box>
       </Drawer>
 

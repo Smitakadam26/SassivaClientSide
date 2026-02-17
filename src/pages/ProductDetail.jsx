@@ -41,7 +41,7 @@ export default function ProductDetails() {
       <Header />
       <Box sx={{ p: { xs: 2, md: 6 } }}>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card sx={{ borderRadius: 3 }}>
               <CardMedia
                 component="img"
@@ -74,7 +74,7 @@ export default function ProductDetails() {
             </Box>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Typography variant="h4" fontWeight={600}>
               {product.name}
             </Typography>

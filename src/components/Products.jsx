@@ -1,10 +1,47 @@
 import { Typography, Card, CardMedia, IconButton, CardContent, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-export default function Products({ filteredProducts, setHovered, hovered, toggleWishlist, wishlist }) {
+import { useEffect, useState } from "react";
+import { fetchWishlist, addToWishlist,removeFromWishlist} from "../services/api";
+
+export default function Products({ filteredProducts, setHovered, hovered }) {
     const navigate = useNavigate();
+    const [wishlist, setWishlist] = useState([]);
+    useEffect(() => {
+        fetchWishlist()
+            .then((data) => {
+                setWishlist(Array.isArray(data) ? data : []);
+            })
+            .catch(() => {
+                setWishlist([]);
+            });
+    }, [setWishlist]);
+    const toggleWishlist = async(product) => {
+        const exists = wishlist.some(
+            (item) => item._id.toString() === product._id.toString()
+        );
+
+        const previous = wishlist;
+
+        try {
+            if (exists) {
+                setWishlist(prev =>
+                    prev.filter(item =>
+                        item._id.toString() !== product._id.toString()
+                    )
+                );
+
+                await removeFromWishlist(product._id);
+            } else {
+                setWishlist(prev => [...prev, product]);
+                await addToWishlist(product._id);
+            }
+        } catch (error) {
+            // rollback if API fails
+            setWishlist(previous);
+        }
+    }
     return (
         <Box
             sx={{
@@ -12,10 +49,11 @@ export default function Products({ filteredProducts, setHovered, hovered, toggle
                 gridTemplateColumns: {
                     xs: "1fr",
                     sm: "repeat(2, 1fr)",
-                    md: "repeat(4, 1fr)"
+                    md: "repeat(3, 1fr)",
+                    lg: "repeat(4, 1fr)"
                 },
                 gap: 3,
-                my:2
+                my: 2
             }}
         >
             {
@@ -55,9 +93,9 @@ export default function Products({ filteredProducts, setHovered, hovered, toggle
                             </IconButton>
 
                             <Box
-  onClick={() => navigate('/productDetail/' + product._id)}
-  sx={{ cursor: "pointer", flexGrow: 1, display: "flex", flexDirection: "column" }}
->
+                                onClick={() => navigate('/productDetail/' + product._id)}
+                                sx={{ cursor: "pointer", flexGrow: 1, display: "flex", flexDirection: "column" }}
+                            >
                                 <CardMedia
                                     component="img"
                                     height={200}

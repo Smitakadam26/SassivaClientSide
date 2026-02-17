@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-    Box,
-    Avatar,
-    Typography,
-    List,
-    ListItemButton,
-    ListItemText,
-    Card,
-    CardContent,
-    Divider,
+ Box,Avatar,Typography,List,ListItemButton,ListItemText,Card,CardContent,Divider,
 } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -31,8 +23,15 @@ export default function Sidebar({setActiveTab,setMobileOpen}) {
     }
     return (
         <>
-            <Box>
-                <img src={Logo} alt="logo" height={75} />
+                <Box component="img" src={Logo} alt="logo" height={75} sx={{
+                                    height: {
+                                        xs: 40,   
+                                        sm: 50,  
+                                        md: 60,   
+                                        lg: 70   
+                                    },
+                                    width: "auto"
+                                }}>
             </Box>
 
             <Card sx={{ borderRadius: 3, background: "#f9e5e5ff" }}>
