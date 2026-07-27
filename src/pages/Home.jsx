@@ -19,7 +19,7 @@ const categories = [
         id: 2,
         name: "Women",
         image: womenbanner,
-        surl: "womensection"
+        url: "womensection"
     },
     {
         id: 3,
