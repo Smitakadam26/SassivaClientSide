@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
-import Newsletter from "./Newsletter";
+import Newsletter from "../components/Newsletter";
 import { Box, Typography, Card, CardMedia} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import menbanner from "../assests/images/menbanner.webp";

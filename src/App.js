@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './pages/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Signup from './pages/Signup';
+import Signup from './components/Signup';
 import Profile from './pages/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminDashboard from './pages/AdminDashboard';

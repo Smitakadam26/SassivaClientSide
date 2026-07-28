@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import Logo from '../assests/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -50,6 +51,8 @@ export default function Header() {
     const { user } = useAuth();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const [searchText,setSearchText] = useState([]);
+    const [products,setProducts] = useState([]);
     const handleClick = () => {
         if (user) {
             if (user.role === "admin") {
@@ -62,7 +65,27 @@ export default function Header() {
             navigate("/Signup");
         }
     };
+    useEffect(()=>{
+        if(searchText.trim() === ""){
+            setProducts([]);
+            return;
+        }
 
+        const timer = setTimeout(async () => {
+
+            const response = await fetch(
+                `https://sassivaserver.vercel.app/search?q=${searchText}`
+            );
+
+            const data = await response.json();
+            console.log(data);
+            setProducts(data);
+
+        }, 300); 
+
+        return () => clearTimeout(timer);
+
+    }, [searchText]);
     return (
         <>
             <AppBar position="sticky" color="inherit" elevation={1}>
@@ -82,10 +105,10 @@ export default function Header() {
                                 alt="logo"
                                 sx={{
                                     height: {
-                                        xs: 40,   
-                                        sm: 50,  
-                                        md: 60,   
-                                        lg: 70   
+                                        xs: 40,
+                                        sm: 50,
+                                        md: 60,
+                                        lg: 70
                                     },
                                     width: "auto"
                                 }}
@@ -93,17 +116,32 @@ export default function Header() {
                         </Box>
 
 
-                        <Box sx={{ flexGrow: 1}} >
-                           
+                        <Box sx={{ flexGrow: 1 }}>
+
                             <Search sx={{ width: '100%', maxWidth: 600, mx: 'auto' }}>
+
                                 <SearchIconWrapper>
                                     <SearchIcon fontSize="small" />
                                 </SearchIconWrapper>
+
                                 <StyledInputBase
                                     placeholder="Search products, brands & more…"
                                     inputProps={{ 'aria-label': 'search' }}
+                                    value={searchText}
+                                    onChange={(e) => setSearchText(e.target.value)}
                                 />
+
                             </Search>
+
+
+                            {
+                                products.map(product => (
+                                    <div key={product._id}>
+                                        {product.name}
+                                    </div>
+                                ))
+                            }
+
                         </Box>
                         <Stack
                             direction="row"
@@ -111,26 +149,13 @@ export default function Header() {
                             alignItems="center"
                             sx={{ minWidth: 200, justifyContent: 'flex-end' }}
                         >
-                            
-                            
-                             {!isMobile && <Box>
+
+
+                            {!isMobile && <Box>
                                 <IconButton aria-label="account" onClick={handleClick}>
                                     <PermIdentityOutlinedIcon />
                                 </IconButton>
                             </Box>}
-                            {/*<Typography
-                                variant="subtitle1"
-                                fontWeight={600}
-                                sx={{ display: { xs: 'none', md: 'block' } }}
-                            >
-                                $3.69
-                            </Typography>*
-
-                            <IconButton aria-label="cart">
-                                <Badge badgeContent={1} color="primary">
-                                    <ShoppingBagOutlinedIcon />
-                                </Badge>
-                            </IconButton>*/}
                         </Stack>
                     </Toolbar>
 

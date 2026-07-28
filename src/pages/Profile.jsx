@@ -4,7 +4,7 @@ import {
   Drawer, useMediaQuery
 } from "@mui/material";
 import { getProfile } from '../services/api';
-import EditProfile from "./EditProfile";
+import EditProfile from "../components/EditProfile";
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import WcIcon from '@mui/icons-material/Wc';
