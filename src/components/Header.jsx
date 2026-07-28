@@ -51,7 +51,7 @@ export default function Header() {
     const { user } = useAuth();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-    const [searchText,setSearchText] = useState([]);
+    const [searchText,setSearchText] = useState("");
     const [products,setProducts] = useState([]);
     const handleClick = () => {
         if (user) {
