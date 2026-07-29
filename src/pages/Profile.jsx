@@ -102,10 +102,7 @@ function WishList() {
       .catch(() => {
         setWishlist([]);
       });
-  }, [wishlist]);
-  const toggleWishlist = (product) => {
-    
-  };
+  }, []);
   const [hovered, setHovered] = useState(false);
   return (
     <Box>
@@ -115,7 +112,6 @@ function WishList() {
 
       <Products
         setHovered={setHovered}
-        toggleWishlist={toggleWishlist}
         hovered={hovered}
         filteredProducts={wishlist}
         wishlist={wishlist}
