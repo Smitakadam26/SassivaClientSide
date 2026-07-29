@@ -38,7 +38,6 @@ export default function Products({ filteredProducts, setHovered, hovered }) {
                 await addToWishlist(product._id);
             }
         } catch (error) {
-            // rollback if API fails
             setWishlist(previous);
         }
     }

@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Products from "./Products";
 import { Typography } from "@mui/material";
-
+import { fetchSearchProducts } from "../services/api";
 export default function SearchProducts() {
     const [searchParams] = useSearchParams();
     const query = searchParams.get("q");
@@ -14,13 +14,13 @@ export default function SearchProducts() {
     useEffect(() => {
         const timer = setTimeout(async () => {
 
-            const response = await fetch(
-                `http://localhost:5000/product/search?q=${query}`
-            );
-
-            const data = await response.json();
-            console.log(data);
-            setProducts(data);
+        fetchSearchProducts(query)
+            .then((data) => {
+                setProducts((data) ? data : []);
+            })
+            .catch(() => {
+                setProducts([]);
+            });
         }, 300);
 
         return () => clearTimeout(timer);

@@ -1,6 +1,18 @@
 
 const API = "https://sassivaserver.vercel.app";
-export const getAllProductsWomenSection = async () => {
+export const fetchSearchProducts = async (query) =>{
+  const timer = setTimeout(async () => {
+
+          const response = await fetch(
+                `${API}/product/search?q=${query}`
+            );
+          const res = await response.json();
+          return res.json();
+        }, 300);
+
+        return () => clearTimeout(timer);
+}
+ export const getAllProductsWomenSection = async () => {
   const res = await fetch(`${API}/product?category=women`);
   return res.json();
 };
