@@ -93,7 +93,7 @@ export default function Header() {
               py: 1,
             }}
           >
-            
+
             <Box>
               <Box
                 component="img"
@@ -120,12 +120,6 @@ export default function Header() {
               }}
             >
               <Search>
-                <SearchIcon
-                  sx={{
-                    color: "text.secondary",
-                    mr: 1,
-                  }}
-                />
 
                 <StyledInputBase
                   placeholder="Search products, brands & more..."
@@ -139,14 +133,18 @@ export default function Header() {
                 />
 
                 <Button
-                  variant="contained"
                   onClick={handleSearch}
                   sx={{
                     ml: 1,
                     whiteSpace: "nowrap",
                   }}
                 >
-                  Search
+                  <SearchIcon
+                  sx={{
+                    color: "text.secondary",
+                    mr: 1,
+                  }}
+                />
                 </Button>
               </Search>
             </Box>
