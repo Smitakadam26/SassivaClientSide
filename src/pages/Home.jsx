@@ -39,15 +39,14 @@ export default function Home() {
     return (
         <>
             <Header />
+            
             <Banner />
-
             <Box sx={{ py: 6 }}>
                     <Typography variant="h4" align="center" gutterBottom>
                         Shop by Category
                     </Typography>
 
-                    <Box
-                        sx={{
+                    <Box sx={{
                             display: "grid",
                             gridTemplateColumns: {
                                 xs: "1fr",
@@ -56,8 +55,7 @@ export default function Home() {
                             },
                             gap: 3,
                             mt: 4
-                        }}
-                    >
+                        }}>
                         {categories.map((cat) => (
                             <Card
                                 key={cat.id}

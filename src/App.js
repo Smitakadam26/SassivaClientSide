@@ -9,6 +9,7 @@ import WomenSection from './pages/WomenSection';
 import MenSection from './pages/MenSection';
 import ProductDetail from './pages/ProductDetail';
 import KidSection from './pages/KidSection';
+import SearchProducts from './components/SearchProducts';
 function App() {
 
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path='/mensection' element={<MenSection/>}/>
         <Route path='/kidsection' element={<KidSection/>}/>
         <Route path='/productdetail/:id' element={<ProductDetail/>}/>
+        <Route path='/search' element={<SearchProducts/>}/>
       </Routes>
     </BrowserRouter>
   );
