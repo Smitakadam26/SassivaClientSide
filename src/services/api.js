@@ -22,6 +22,14 @@ export const getAllProducts = async () => {
   const res = await fetch(`${API}/product/All`);
   return res.json();
 };
+export const getAllUsers= async () => {
+  console.log("users get")
+  const res = await fetch(`${API}/users/All`,{
+    credentials: "include"
+  });
+  console.log(res);
+  return res.json();
+};
 export const getProfile = async () => {
   const res = await fetch(`${API}/users/profile`, {
     credentials: "include"

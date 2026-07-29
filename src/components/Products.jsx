@@ -9,8 +9,6 @@ export default function Products({ filteredProducts, setHovered, hovered}) {
     const navigate = useNavigate();
     const [wishlist, setWishlist] = useState([]);
     useEffect(() => {
-        
-
         fetchWishlist()
             .then((data) => {
                 setWishlist(Array.isArray(data) ? data : []);

@@ -13,7 +13,8 @@ import ManageOrders from "../components/ManageOrders";
 import { useAuth } from "../context/AuthContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from '../assests/images/logo.png';
-const drawerWidth = 200;
+import { useEffect } from "react";
+import { getAllProducts, getAllUsers } from "../services/api";
 
 export default function AdminDashboard() {
   const [activePage, setActivePage] = useState("addProduct");
@@ -21,7 +22,8 @@ export default function AdminDashboard() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const[noOfProducts,setNoOfProducts] = useState(0);
+  const[noOfUsers,setNoOfUsers] = useState(0);
   const renderContent = () => {
     switch (activePage) {
       case "addProduct":
@@ -37,13 +39,10 @@ export default function AdminDashboard() {
   const Sidebar = () => {
     return (
       <Box sx={{
-        width: drawerWidth,
-        [`& .MuiDrawer-paper`]: {
-          width: drawerWidth,
-          boxSizing: "border-box",
-        }
+        width: "auto",
+
       }}>
-        <Box sx={{ minWidth: 50 }}>
+        <Box sx={{ minWidth: 70 }}>
           <Box
             component="img"
             src={logo}
@@ -56,7 +55,7 @@ export default function AdminDashboard() {
                 lg: 70
               },
               width: "auto",
-              mt:2
+              mt: 2
             }}
           />
         </Box>
@@ -69,15 +68,15 @@ export default function AdminDashboard() {
         <Divider sx={{ backgroundColor: "#333" }} />
 
         <List>
-          <ListItemButton onClick={() =>{ setActivePage("addProduct");setMobileOpen(false)}}>
+          <ListItemButton onClick={() => { setActivePage("addProduct"); setMobileOpen(false) }}>
             <ListItemText primary="➕ Add Product" />
           </ListItemButton>
 
-          <ListItemButton onClick={() => {setActivePage("editProduct");setMobileOpen(false)}}>
+          <ListItemButton onClick={() => { setActivePage("editProduct"); setMobileOpen(false) }}>
             <ListItemText primary="✏️ Edit / Delete Product" />
           </ListItemButton>
 
-          <ListItemButton onClick={() => {setActivePage("orders");setMobileOpen(false)}}>
+          <ListItemButton onClick={() => { setActivePage("orders"); setMobileOpen(false) }}>
             <ListItemText primary="📦 Manage Orders" />
           </ListItemButton>
 
@@ -90,6 +89,22 @@ export default function AdminDashboard() {
       </Box >
     )
   }
+  useEffect(() => {
+    getAllProducts()
+            .then((data) => {
+                setNoOfProducts(data.length);
+            })
+            .catch(() => {
+                setNoOfProducts(0);
+            });
+    getAllUsers()
+            .then((data) => {
+                setNoOfUsers(data.length);
+            })
+            .catch(() => {
+                setNoOfUsers(0);
+            });
+  }, []);
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       {isMobile && (
@@ -120,13 +135,13 @@ export default function AdminDashboard() {
         <Sidebar />
       </Drawer>
 
-      <Box sx={{ flexGrow: 1, p: 4,backgroundColor: "#f4f6f8" }}>
+      <Box sx={{ flexGrow: 1, p: 4, backgroundColor: "#f4f6f8" }}>
 
         <Grid container spacing={3} mb={4}>
           <StatCard title="Total Orders" value="1,245" icon={<ShoppingCartIcon />} />
-          <StatCard title="Total Users" value="856" icon={<PeopleIcon />} />
-          <StatCard title="Products" value="342" icon={<InventoryIcon />} />
-          <StatCard title="Revenue" value="$12,430" icon={<AttachMoneyIcon />} />
+          <StatCard title="Total Users" value={noOfUsers} icon={<PeopleIcon />} />
+          <StatCard title="Products" value= {noOfProducts} icon={<InventoryIcon />} />
+          <StatCard title="Revenue" value="256" icon={<AttachMoneyIcon />} />
         </Grid>
 
         <Card sx={{ borderRadius: 3 }}>
