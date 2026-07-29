@@ -3,12 +3,19 @@ import { useNavigate } from "react-router-dom"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useEffect, useState } from "react";
-import { fetchWishlist, addToWishlist,removeFromWishlist} from "../services/api";
+import { fetchWishlist, addToWishlist, removeFromWishlist } from "../services/api";
 
 export default function Products({ filteredProducts, setHovered, hovered }) {
     const navigate = useNavigate();
     const [wishlist, setWishlist] = useState([]);
     useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            setWishlist([]);
+            return;
+        }
+
         fetchWishlist()
             .then((data) => {
                 setWishlist(Array.isArray(data) ? data : []);
@@ -16,8 +23,8 @@ export default function Products({ filteredProducts, setHovered, hovered }) {
             .catch(() => {
                 setWishlist([]);
             });
-    }, [setWishlist]);
-    const toggleWishlist = async(product) => {
+    }, []);
+    const toggleWishlist = async (product) => {
         const exists = wishlist.some(
             (item) => item._id.toString() === product._id.toString()
         );

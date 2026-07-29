@@ -16,7 +16,8 @@ export default function SearchProducts() {
 
         fetchSearchProducts(query)
             .then((data) => {
-                setProducts((data) ? data : []);
+                console.log(data);
+                setProducts(data);
             })
             .catch(() => {
                 setProducts([]);
