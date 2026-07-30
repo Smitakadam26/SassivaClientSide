@@ -6,13 +6,13 @@ import {
   Chip,
   Divider,
   Rating,
-  Card,
   CardMedia,
   Accordion,
   AccordionDetails,
   AccordionSummary,
 
 } from "@mui/material";
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../services/api";
@@ -42,38 +42,63 @@ export default function ProductDetails() {
       <Box sx={{ p: { xs: 2, md: 6 } }}>
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <Card sx={{ borderRadius: 3 }}>
+          
+            <Box sx={{ display: { xs: "block", sm: "none" } }}>
               <CardMedia
                 component="img"
-                height="420"
-                image={activeImage || "/placeholder.png"}
-                sx={{ objectFit: "cover" }}
+                image={activeImage}
+                sx={{
+                  width: "100%",
+                  height: 400,
+                  objectFit: "cover",
+                  borderRadius: 2,
+                }}
               />
-            </Card>
 
-            <Box display="flex" gap={2} mt={2}>
-              {product.images?.map((img, index) => (
-                <Box
-                  key={index}
-                  component="img"
-                  src={img}
-                  onClick={() => setActiveImage(img)}
-                  sx={{
-                    width: 80,
-                    height: 80,
-                    cursor: "pointer",
-                    borderRadius: 2,
-                    border:
-                      activeImage === img
-                        ? "2px solid #1976d2"
-                        : "1px solid #ddd",
-                    objectFit: "cover"
-                  }}
-                />
-              ))}
+              <Box display="flex" gap={2} mt={2} justifyContent="center">
+                {product.images.map((img, index) => (
+                  <Box
+                    key={index}
+                    component="img"
+                    src={img}
+                    onClick={() => setActiveImage(img)}
+                    sx={{
+                      width: 70,
+                      height: 70,
+                      cursor: "pointer",
+                      borderRadius: 2,
+                      border:
+                        activeImage === img
+                          ? "2px solid #1976d2"
+                          : "1px solid #ddd",
+                      objectFit: "cover",
+                    }}
+                  />
+                ))}
+              </Box>
             </Box>
-          </Grid>
 
+            <Grid
+              container
+              spacing={2}
+              sx={{ display: { xs: "none", sm: "flex" } }}
+            >
+              {product.images.map((img, index) => (
+                <Grid size={{ xs: 12, sm: 6 }} key={index}>
+                  <CardMedia
+                    component="img"
+                    image={img}
+                    sx={{
+                      width: "100%",
+                      height: 400,
+                      objectFit: "cover",
+                      borderRadius: 2,
+                    }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
             <Typography variant="h4" fontWeight={600}>
               {product.name}
