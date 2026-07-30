@@ -117,7 +117,8 @@ export default function EditProduct() {
             gridTemplateColumns: {
               xs: "1fr",
               sm: "1fr 1fr",
-              md: "repeat(3, 1fr)"
+              md: "repeat(3, 1fr)",
+              lg: "repeat(4, 1fr)"
             },
             gap: 3
           }}
@@ -169,7 +170,7 @@ export default function EditProduct() {
                   </Typography>
                   <Typography variant="subtitle2" color="text.secondary">{product.color}</Typography>
                   <Typography variant="h6" fontWeight={600}>{`₹${product.price}`}</Typography>
-                  <Button onClick={() => handleEditClick(product)}>Edit </Button>
+                  <Button onClick={() => handleEditClick(product)} variant="contained">Edit </Button>
                 </CardContent>
 
               </Card>
