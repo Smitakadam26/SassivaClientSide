@@ -100,7 +100,7 @@ export default function ProductDetails() {
             </Grid>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <Typography variant="h4" fontWeight={600}>
+            <Typography variant="h5" fontWeight={600}>
               {product.name}
             </Typography>
 
