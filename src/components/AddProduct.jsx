@@ -32,7 +32,6 @@ export default function AddProduct() {
     images.forEach((img) => {
       formData.append("images", img);
     });
-
     try {
       const res = await fetch("https://sassivaserver.vercel.app/product/add", {
         method: "POST",

@@ -22,7 +22,7 @@ export default function EditProduct() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [newImages, setNewImages] = useState([]);
 
-  const TYPE_OPTIONS = ["clothing", "footwear", "bag", "accessories", "jwellery"];
+  const TYPE_OPTIONS = ["clothing", "footwear", "bag", "accessories", "jwellery","watches"];
   const CATEGORY_OPTIONS = ["women", "men", "kids"];
   const fileInputRef = useRef();
   useEffect(() => {
@@ -49,6 +49,7 @@ export default function EditProduct() {
 
   const handleEditClick = (product) => {
     setSelectedProduct({ ...product });
+
     setNewImages([]);
     setOpen(true);
   };
@@ -69,13 +70,14 @@ export default function EditProduct() {
 
     try {
       const formData = new FormData();
+      
 
+   
       Object.keys(selectedProduct).forEach((key) => {
-        if (key !== "images") {
+     
           formData.append(key, selectedProduct[key]);
-        }
+        
       });
-
       if (newImages.length > 0) {
         newImages.forEach((img) => formData.append("images", img));
       } else if (Array.isArray(selectedProduct.images)) {
@@ -83,13 +85,13 @@ export default function EditProduct() {
           formData.append("images", img)
         );
       }
-
+      console.log(selectedProduct);
+      console.log(formData);
       const res = await updateProduct(selectedProduct._id, formData);
 
       if (!res?.product) {
         console.error("Invalid update response:", res);
       }
-
       setProducts((prev) =>
         prev.map((p) =>
           p && p._id === selectedProduct._id ? res.product : p
