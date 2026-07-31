@@ -20,7 +20,6 @@ export default function EditProduct() {
   const [products, setProducts] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [editImages, setEditImages] = useState(false);
   const [newImages, setNewImages] = useState([]);
 
   const TYPE_OPTIONS = ["clothing", "footwear", "bag", "accessories", "jwellery"];
@@ -50,7 +49,6 @@ export default function EditProduct() {
 
   const handleEditClick = (product) => {
     setSelectedProduct({ ...product });
-    setEditImages(false);
     setNewImages([]);
     setOpen(true);
   };
