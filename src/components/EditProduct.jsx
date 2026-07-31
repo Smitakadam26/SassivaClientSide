@@ -13,7 +13,7 @@ import {
   TextField,
   MenuItem
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getAllProducts, updateProduct } from "../services/api";
 
 export default function EditProduct() {
@@ -25,7 +25,7 @@ export default function EditProduct() {
 
   const TYPE_OPTIONS = ["clothing", "footwear", "bag", "accessories", "jwellery"];
   const CATEGORY_OPTIONS = ["women", "men", "kids"];
-
+  const fileInputRef = useRef();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -150,7 +150,7 @@ export default function EditProduct() {
                     backgroundColor: "white"
                   }}
                 />
-                
+
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography color="text.secondary" fontWeight={600}>
                     {product.brand}
@@ -192,7 +192,7 @@ export default function EditProduct() {
                   ["quantity", "Quantity"],
                   ["fabric", "Fabric"],
                   ["size", "Size"],
-                  ["color","Color"]
+                  ["color", "Color"]
                 ].map(([field, label]) => (
                   <Grid item xs={12} sm={6} key={field}>
                     <TextField
@@ -264,25 +264,22 @@ export default function EditProduct() {
                 ))}
               </Box>
 
-              {!editImages && (
-                <Button size="small" onClick={() => setEditImages(true)}>
-                  Replace Images
-                </Button>
-              )}
 
-              {editImages && (
-                <TextField
-                  fullWidth
-                  label="New Images (comma separated URLs)"
-                  onChange={(e) =>
-                    setNewImages(
-                      e.target.value
-                        .split(",")
-                        .map((img) => img.trim())
-                    )
-                  }
-                />
-              )}
+              <Button
+                variant="contained"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Replace Images
+              </Button>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                hidden
+                multiple
+                accept="image/*"
+                onChange={(e) => setNewImages([...e.target.files])}
+              />
             </Grid>
           </Grid>
         </DialogContent>
